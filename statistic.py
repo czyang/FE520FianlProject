@@ -30,11 +30,18 @@ def F_statistic(y_test, y_pred):
 def Prob(y_test, y_pred):
 	pass
 
-def Log_likelihood():
-	pass
+def Log_likelihood(y_test, y_pred):
+	s = 0
+	e = 2.
+	for i in range(0, len(y_test)):
+		s += math.log(1 / np.sqrt(2 * math.pi)) + (y_test[i] - y_pred[i]) **2 / 2
+	return s
 
-def AIC():
-	pass
+def AIC(y_test, y_pred, p):
+	return -2 * Log_likelihood(y_test, y_pred) + 2 * p
 
-def BIC():
-	pass
+def BIC(y_test, y_pred, p, n): # n sample numbers, p number of independent variables x1,x2,..b 
+	return -2 * Log_likelihood(y_test, y_pred) + math.log(n) * p
+
+def HQ(y_test, y_pred, p, n): # n sample numbers, p number of independent variables x1,x2,..b 
+	return -2 * Log_likelihood(y_test, y_pred) + math.log(math.log(n)) * p
