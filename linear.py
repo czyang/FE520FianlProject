@@ -4,13 +4,16 @@ import numpy as np
 class LinearRegression():
 	def __init__(self, learningrate = 0.0000001, max_iter = 10, method = 'Normal'):
 		self.learningrate = learningrate
-		self.coef = []
+		self.coef = 0
 		self.intercept = 0
 		self.max_iter = max_iter
 		self.method = method
 
 	def fit(self, x_train, y_train):
 		if self.method == 'Gradient':
+			m = len(x_train)
+			x_train = x_train.reshape(m, len(x_train[0]))
+			y_train = y_train.reshape(m, len(x_train[0]))
 			self.coef = np.zeros((len(x_train[0])))
 			num = len(x_train)
 			for i in range(0, self.max_iter):
@@ -36,17 +39,19 @@ class LinearRegression():
 			y_matrix = np.mat(y_train)
 			x0_matrix = np.mat(x0)
 			x0_T = x0_matrix.T
-			x_T = x_matrix
+			x_T = x_matrix.T
 			x_T = np.hstack((x0_T, x_T))
 			
 			x_matrix = x_T.T
 			tmp1 = np.dot(x_matrix, x_T)
 			tmp2 = np.linalg.inv(tmp1)
-			theta = tmp2 * x_matrix * y_matrix
-			theta = np.array(theta)
-			for i in range(1, len(theta)):
-				self.coef.append(theta[i][0])
-			self.intercept = [theta[0][0]]
+			print(tmp2)
+			print(x_matrix)
+			print(y_matrix.T)
+			theta = tmp2 * x_matrix * y_matrix.T
+			
+			self.coef = theta[1]
+			self.intercept = theta[0]
 
 
 	def loss(self, x_train, y_train):
@@ -62,3 +67,32 @@ class LinearRegression():
 		y_pred = np.array(y_pred)
 		y_pred = y_pred.reshape((len(x_test), 1))
 		return y_pred
+
+import csv
+
+with open('train.csv') as csvfile:
+    reader = csv.DictReader(csvfile)
+    y = np.array([int(row['price']) for row in reader])
+
+with open('train.csv') as csvfile:
+    reader = csv.DictReader(csvfile)
+    x = np.array([int(row['sqft_living']) for row in reader])
+
+with open('test.csv') as csvfile:
+    reader = csv.DictReader(csvfile)
+    yt = np.array([int(row['price']) for row in reader])
+
+with open('test.csv') as csvfile:
+    reader = csv.DictReader(csvfile)
+    xt = np.array([int(row['sqft_living']) for row in reader])
+
+
+csvfile.close()
+n = len(xt)
+xt = xt.reshape(n,1)
+yt = yt.reshape(n,1)
+LR = LinearRegression(method = 'Normal')
+LR.fit(x, y)
+print(LR.coef, LR.coef.shape, LR.intercept)
+y_pred = LR.predict(xt)
+import matplotlib.pyplot as plt
