@@ -34,5 +34,11 @@ class LinearRegression():
 		return np.mean((y_train - y_pred) ** 2)
 
 	def predict(self, x_test):
-		y_pred = x_test * self.coef + self.intercept
+		y_pred = []
+
+		for i in range(0, len(x_test)):
+			y_pred.append(np.dot(x_test[i], self.coef) + self.intercept)
+
+		y_pred = np.array(y_pred)
+		y_pred = y_pred.reshape((len(x_test), 1))
 		return y_pred
