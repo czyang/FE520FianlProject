@@ -1,25 +1,29 @@
 import numpy as np
-import pandas as pd
+from linear import LinearRegression
 
-class PolynomialFeatures:
-  def __init__(self, degree):
-    self.degree = degree
+class NonLinearRegression(LinearRegression):
+	def __init__(self, learningrate = 0.0000001, max_iter = 10, degree = 2):
+		LinearRegression.__init__(self, learningrate, max_iter = 10, method = 'Normal')
+		self.degree = degree
 
-  # Get coeffs from input
-  def fit(self, X, y=None):
-    # Least squares polynomial fit
-    return np.polyfit(X, y, deg=self.degree)
+	def enlarge(self, x):
+		res = []
+		for i in range(0, len(x)):
+			slices = []
+			for j in range(1, self.degree + 1):
+				slices.append(x[i] ** j)
+			res.append(np.array(slices))
+		res = np.array(res)
+		return res.reshape((len(x), self.degree))	
 
-  # def tranform(self, X):
+	def fit(self, x_train, y_train):
+		x_train = self.enlarge(x_train)
+		LinearRegression.fit(self, x_train, y_train)
 
-x = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-y = [1,   6,  17,  34,  57,  86, 121, 162, 209, 262, 321]
-ply = PolynomialFeatures(2)
-coeffs = ply.fit(x, y)
-# coeffs = np.polyfit(x, y, deg=2)
-print("coeffs", coeffs)
-print(np.poly1d(coeffs))
-yf = np.polyval(np.poly1d(coeffs), x)
-print(yf)
+	def loss(self, x_train, y_train):
+		y_pred = self.predict(x_train)
+		return np.mean((y_train - y_pred) ** 2)
 
-print('%.1g' % max(y - yf))
+	def predict(self, x_test):
+		x_test = self.enlarge(x_test)
+		return LinearRegression.predict(self, x_test)
