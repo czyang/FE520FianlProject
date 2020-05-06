@@ -24,11 +24,19 @@ def Adj_R_squared(y_test, y_pred, p):
 	n = len(y_test)
 	return 1 - (n - 1) * (R_squared(y_test, y_pred) ** 2) / (n - p - 1)
 
-def F_statistic(y_test, y_pred):
-	pass
+def F_statistic(y_test, y_pred,p):
+    n = len(y_test)
+    MSM = SSR(y_test, y_pred) / (p - 1)
+	MSE = SSE(y_test, y_pred) / (n - p)
+	return MSM/MSE
 
 def Prob(y_test, y_pred):
-	pass
+	import scipy.stats as stats
+	df1 = len(y_test) - 1
+	df2 = len(y_pred) - 1
+	p_value = stats.f.sf(F, df1, df2)
+	return p_value
+
 
 def Log_likelihood(y_test, y_pred):
 	s = 0
