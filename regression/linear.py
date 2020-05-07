@@ -1,8 +1,7 @@
 import numpy as np
 # import statistic as s
-import sys
-sys.path.append("../summary")
-import summary as sm
+from regression.summary import Summary
+
 
 class LinearRegression():
 	def __init__(self, learningrate = 0.0000001, max_iter = 10, method = 'Normal'):
@@ -51,15 +50,13 @@ class LinearRegression():
 				self.coef.append(theta[i][0])
 			self.intercept = [theta[0][0]]
 
-		summary = sm.Summary()
+		summary = Summary()
 		summary.setTitle("Linear Regression")
 		summary.append("Model:", "Regression")
 		summary.append("Method:", "Linear Regression")
 		summary.appendDate()
 		summary.appendTime()
-
 		return summary
-
 
 	def loss(self, x_train, y_train):
 		y_pred = self.predict(x_train)
