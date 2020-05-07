@@ -25,8 +25,8 @@ def Adj_R_squared(y_test, y_pred, p):
 	return 1 - (n - 1) * (R_squared(y_test, y_pred) ** 2) / (n - p - 1)
 
 def F_statistic(y_test, y_pred,p):
-    n = len(y_test)
-    MSM = SSR(y_test, y_pred) / (p - 1)
+	n = len(y_test)
+	MSM = SSR(y_test, y_pred) / (p - 1)
 	MSE = SSE(y_test, y_pred) / (n - p)
 	return MSM/MSE
 

@@ -1,5 +1,7 @@
 import numpy as np
 # import statistic as s
+import sys
+sys.path.append("../summary")
 import summary as sm
 
 class LinearRegression():

@@ -1,5 +1,6 @@
 from tabulate import tabulate
 from datetime import date
+from datetime import datetime
 
 class Summary:
     def __init__(self):
@@ -13,7 +14,7 @@ class Summary:
         self.append("Date:", date.today())
 
     def appendTime(self):
-        self.append("Time:", date.now().now.strftime("%H:%M:%S"))
+        self.append("Time:", datetime.now().strftime("%H:%M:%S"))
 
     def append(self, field, value):
         self.dataTable.append([field, value])
@@ -21,7 +22,7 @@ class Summary:
     def get_summary(self):
         res = "\n"
         res += self.title + "\n"
-        res += tabulate(self.dataTable, tablefmt="simple") + "\n"
+        res += tabulate(self.dataTable, tablefmt="psql", colalign=("left", "right")) + "\n"
         return res
 
 
