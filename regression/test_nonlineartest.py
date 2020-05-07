@@ -5,19 +5,21 @@ import nonlinear
 sys.path.append("../stats")
 import stats as s
 
-with open('../../train.csv') as csvfile:
+relPath = '../'
+
+with open(relPath + 'train.csv') as csvfile:
     reader = csv.DictReader(csvfile)
     y = np.array([int(row['price']) for row in reader])
 
-with open('../../train.csv') as csvfile:
+with open(relPath + 'train.csv') as csvfile:
     reader = csv.DictReader(csvfile)
     x = np.array([int(row['sqft_living']) for row in reader])
 
-with open('../../test.csv') as csvfile:
+with open(relPath + 'test.csv') as csvfile:
     reader = csv.DictReader(csvfile)
     yt = np.array([int(row['price']) for row in reader])
 
-with open('../../test.csv') as csvfile:
+with open(relPath + 'test.csv') as csvfile:
     reader = csv.DictReader(csvfile)
     xt = np.array([int(row['sqft_living']) for row in reader])
 
@@ -35,7 +37,8 @@ yt = yt.reshape(n,1)
 csvfile.close()
 import matplotlib.pyplot as plt
 LR = nonlinear.NonLinearRegression()
-LR.fit(x, y)
+sm = LR.fit(x, y)
+print(sm.get_summary())
 print(LR.coef, LR.intercept)
 y_pred = LR.predict(xt)
 x1 = np.linspace(0, 140000)
