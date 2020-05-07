@@ -58,8 +58,27 @@ Skew:                           0.234   Prob(JB):                        0.392
 Kurtosis:                       2.519   Cond. No.                         144.
 ==============================================================================
 
+### Structure
+.
+├── regression
+│   ├── __init__.py
+│   ├── linear.py
+│   ├── nonlinear.py
+│   ├── stats.py
+│   └── summary.py
+├── tests
+│   ├── __init__.py
+│   ├── test_linear.py
+│   ├── test_nonlineartest.py
+│   ├── test_stats.py
+│   └── test_summary.py
+├── project.md
+├── README.md
+├── test.csv
+└── train.csv
 
 ### Reference
 https://cs.stanford.edu/~ermon/cs325/slides/ml_nonlin_reg.pdf
 https://github.com/statsmodels/statsmodels
 https://rickwierenga.com/blog/ml-fundamentals/polynomial-regression.html
+https://docs.python-guide.org/writing/structure/
