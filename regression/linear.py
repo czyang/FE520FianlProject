@@ -1,5 +1,6 @@
 import numpy as np
 # import statistic as s
+import summary as sm
 
 class LinearRegression():
 	def __init__(self, learningrate = 0.0000001, max_iter = 10, method = 'Normal'):
@@ -47,6 +48,15 @@ class LinearRegression():
 			for i in range(1, len(theta)):
 				self.coef.append(theta[i][0])
 			self.intercept = [theta[0][0]]
+
+		summary = sm.Summary()
+		summary.setTitle("Linear Regression")
+		summary.append("Model:", "Regression")
+		summary.append("Method:", "Linear Regression")
+		summary.appendDate()
+		summary.appendTime()
+
+		return summary
 
 
 	def loss(self, x_train, y_train):

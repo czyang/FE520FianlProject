@@ -1,4 +1,5 @@
 from tabulate import tabulate
+from datetime import date
 
 class Summary:
     def __init__(self):
@@ -7,6 +8,12 @@ class Summary:
 
     def setTitle(self, title):
         self.title = title
+
+    def appendDate(self):
+        self.append("Date:", date.today())
+
+    def appendTime(self):
+        self.append("Time:", date.now().now.strftime("%H:%M:%S"))
 
     def append(self, field, value):
         self.dataTable.append([field, value])

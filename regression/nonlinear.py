@@ -18,7 +18,9 @@ class NonLinearRegression(LinearRegression):
 
 	def fit(self, x_train, y_train):
 		x_train = self.enlarge(x_train)
-		LinearRegression.fit(self, x_train, y_train)
+		summary = LinearRegression.fit(self, x_train, y_train)
+		summary.setTitle("Nonlinear Regression")
+		return summary
 
 	def loss(self, x_train, y_train):
 		y_pred = self.predict(x_train)

@@ -34,6 +34,31 @@ This is easy. please refer https://www.statsmodels.org/dev/examples/notebooks/ge
 Dan Wang, Apr 18 at 2:45pm
 
 
+                            OLS Regression Results
+==============================================================================
+Dep. Variable:                      y   R-squared:                       1.000
+Model:                            OLS   Adj. R-squared:                  1.000
+Method:                 Least Squares   F-statistic:                 4.020e+06
+Date:                Fri, 13 Mar 2020   Prob (F-statistic):          2.83e-239
+Time:                        13:54:01   Log-Likelihood:                -146.51
+No. Observations:                 100   AIC:                             299.0
+Df Residuals:                      97   BIC:                             306.8
+Df Model:                           2
+Covariance Type:            nonrobust
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const          1.3423      0.313      4.292      0.000       0.722       1.963
+x1            -0.0402      0.145     -0.278      0.781      -0.327       0.247
+x2            10.0103      0.014    715.745      0.000       9.982      10.038
+==============================================================================
+Omnibus:                        2.042   Durbin-Watson:                   2.274
+Prob(Omnibus):                  0.360   Jarque-Bera (JB):                1.875
+Skew:                           0.234   Prob(JB):                        0.392
+Kurtosis:                       2.519   Cond. No.                         144.
+==============================================================================
+
+
 ### Reference
 https://cs.stanford.edu/~ermon/cs325/slides/ml_nonlin_reg.pdf
 https://github.com/statsmodels/statsmodels
