@@ -1,5 +1,6 @@
 import numpy as np
-# import statistic as s
+
+from regression.stats import Stats
 from regression.summary import Summary
 
 
@@ -50,12 +51,16 @@ class LinearRegression():
 				self.coef.append(theta[i][0])
 			self.intercept = [theta[0][0]]
 
+		stats = Stats()
+
 		summary = Summary()
 		summary.setTitle("Linear Regression")
 		summary.append("Model:", "Regression")
 		summary.append("Method:", "Linear Regression")
 		summary.appendDate()
 		summary.appendTime()
+		# TODO: Add stats here
+
 		return summary
 
 	def loss(self, x_train, y_train):

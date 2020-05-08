@@ -25,7 +25,7 @@ class Summary:
         res += tabulate(self.dataTable, tablefmt="psql", colalign=("left", "right")) + "\n"
         return res
 
-
+# Usage:
 # s = Summary()
 # s.setTitle("Test title")
 # s.append("Dep. Variable:", 123)
