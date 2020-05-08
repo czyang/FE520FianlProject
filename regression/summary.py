@@ -7,18 +7,23 @@ class Summary:
         self.title = ""
         self.dataTable = []
 
+    # Set title for the form
     def setTitle(self, title):
         self.title = title
 
+    # Append current date to data table
     def appendDate(self):
         self.append("Date:", date.today())
 
+    # Append current time to data table
     def appendTime(self):
         self.append("Time:", datetime.now().strftime("%H:%M:%S"))
 
+    # Append a item (key and value) to data table
     def append(self, field, value):
         self.dataTable.append([field, value])
 
+    # Get the summary string from data table
     def get_summary(self):
         res = "\n"
         res += self.title + "\n"

@@ -40,12 +40,12 @@ class TestStats(unittest.TestCase):
         self.assertAlmostEqual(0.25, res, places=2)
 
     def testF_statistic(self):
-        res = st.F_statistic(y_test, y_pred, 1)
-        self.assertAlmostEqual(0.25, res, places=2)
+        res = st.F_statistic(y_test, y_pred, 2)
+        self.assertAlmostEqual(9.0, res, places=2)
 
     def testProb(self):
-        res = st.Prob(y_test, y_pred, 1)
-        self.assertAlmostEqual(0, res, places=2)
+        res = st.Prob(y_test, y_pred, 2)
+        self.assertAlmostEqual(0.028, res, places=3)
 
     def testLog_likelihood(self):
         res = st.Log_likelihood(y_test, y_pred)
