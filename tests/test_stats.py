@@ -44,8 +44,7 @@ class TestStats(unittest.TestCase):
         self.assertAlmostEqual(0.25, res, places=2)
 
     def testProb(self):
-        res = st.Prob(y_test, y_pred)
-        print(res)
+        res = st.Prob(y_test, y_pred, 1)
         self.assertAlmostEqual(0, res, places=2)
 
     def testLog_likelihood(self):
