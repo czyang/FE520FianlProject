@@ -1,5 +1,6 @@
 import numpy as np
 import math
+import scipy.stats as stats
 
 class Stats:
 	def SSE(self, y_test, y_pred):
@@ -31,10 +32,10 @@ class Stats:
 		MSE = self.SSE(y_test, y_pred) / (n - p)
 		return MSM/MSE
 
-	def Prob(self, y_test, y_pred):
-		import scipy.stats as stats
+	def Prob(self, y_test, y_pred, p):
 		df1 = len(y_test) - 1
 		df2 = len(y_pred) - 1
+		F = self.F_statistic(y_test,y_pred,p)
 		p_value = stats.f.sf(F, df1, df2)
 		return p_value
 
