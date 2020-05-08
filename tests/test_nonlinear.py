@@ -18,13 +18,9 @@ class TestNonLinear(unittest.TestCase):
         summary = NR.fit(x, y)
         self.assertIsNotNone(summary.get_summary())
 
-    # def testloss(self):
-    #     NR = NonLinearRegression()
-    #     self.assertIsNotNone(NR.loss(x, y))
-
     # def testpredict(self):
     #     NR = NonLinearRegression()
-    #     self.assertIsNotNone(NR.predict(x))
+    #     self.assertIsNotNone(NR.predict(x, False))
 
 if __name__ == '__main__':
   unittest.main()
