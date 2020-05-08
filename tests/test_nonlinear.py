@@ -3,7 +3,7 @@ import csv
 from regression import nonlinear
 
 
-relPath = '../'
+relPath = ''
 
 with open(relPath + 'train.csv') as csvfile:
     reader = csv.DictReader(csvfile)
@@ -13,11 +13,11 @@ with open(relPath + 'train.csv') as csvfile:
     reader = csv.DictReader(csvfile)
     x = np.array([int(row['sqft_living']) for row in reader])
 
-with open(relPath + 'tests.csv') as csvfile:
+with open(relPath + 'test.csv') as csvfile:
     reader = csv.DictReader(csvfile)
     yt = np.array([int(row['price']) for row in reader])
 
-with open(relPath + 'tests.csv') as csvfile:
+with open(relPath + 'test.csv') as csvfile:
     reader = csv.DictReader(csvfile)
     xt = np.array([int(row['sqft_living']) for row in reader])
 
@@ -38,14 +38,14 @@ LR = nonlinear.NonLinearRegression()
 sm = LR.fit(x, y)
 print(sm.get_summary())
 print(LR.coef, LR.intercept)
-y_pred = LR.predict(xt)
+y_pred = LR.predict(xt, False)
 x1 = np.linspace(0, 140000)
-y1 = LR.predict(x1)
+y1 = LR.predict(x1, False)
 
 plt.figure()
 plt.plot(x1,y1)
 plt.plot(x,y, 'ro')
 plt.xlabel('sqft_living')
 plt.ylabel('price')
-plt.title('Gradient Descent')
+plt.title('Normal Equation')
 plt.show()

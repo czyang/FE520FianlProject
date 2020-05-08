@@ -1,5 +1,5 @@
 import numpy as np
-from linear import LinearRegression
+from regression.linear import LinearRegression
 
 class NonLinearRegression(LinearRegression):
 	def __init__(self, learningrate = 0.0000001, max_iter = 10, degree = 2):
@@ -26,6 +26,7 @@ class NonLinearRegression(LinearRegression):
 		y_pred = self.predict(x_train)
 		return np.mean((y_train - y_pred) ** 2)
 
-	def predict(self, x_test):
-		x_test = self.enlarge(x_test)
+	def predict(self, x_test, enlarged = True):
+		if enlarged == False:
+			x_test = self.enlarge(x_test)
 		return LinearRegression.predict(self, x_test)

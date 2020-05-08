@@ -1,8 +1,6 @@
 import numpy as np
-
 from regression.stats import Stats
 from regression.summary import Summary
-
 
 class LinearRegression():
 	def __init__(self, learningrate = 0.0000001, max_iter = 10, method = 'Normal'):
@@ -34,7 +32,7 @@ class LinearRegression():
 
 			# self.loss(x_train, y_train)
 		elif self.method == 'Normal':
-			x0 = [0.1 for i in x_train]
+			x0 = [1.0 for i in x_train]
 			x_matrix = np.mat(x_train)
 			y_matrix = np.mat(y_train)
 			x0_matrix = np.mat(x0)
@@ -51,12 +49,20 @@ class LinearRegression():
 				self.coef.append(theta[i][0])
 			self.intercept = [theta[0][0]]
 
+		y_pred = self.predict(x_train)
 		stats = Stats()
 
 		summary = Summary()
 		summary.setTitle("Linear Regression")
 		summary.append("Model:", "Regression")
-		summary.append("Method:", "Linear Regression")
+		summary.append("R_squared:", stats.R_squared(y_train, y_pred))
+		summary.append("Adj_R_squared:", stats.Adj_R_squared(y_train, y_pred, len(x_train[0]) + 1))
+		summary.append("F_statistic:", stats.F_statistic(y_train, y_pred, len(x_train[0]) + 1))
+		summary.append("Prob:", stats.Prob(y_train, y_pred, len(x_train[0]) + 1))
+		summary.append("Log_likelihood:", stats.Log_likelihood(y_train, y_pred))
+		summary.append("AIC:", stats.AIC(y_train, y_pred, len(x_train[0]) + 1))
+		summary.append("BIC:", stats.BIC(y_train, y_pred, len(x_train[0]) + 1, len(y_train)))
+		summary.append("HQ:", stats.HQ(y_train, y_pred, len(x_train[0]) + 1, len(y_train)))
 		summary.appendDate()
 		summary.appendTime()
 		# TODO: Add stats here
