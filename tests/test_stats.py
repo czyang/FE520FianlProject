@@ -28,7 +28,6 @@ class TestStats(unittest.TestCase):
 
     def testSST(self):
         res = st.SST(y_test, y_pred)
-        print(res)
         self.assertAlmostEqual(8.0, res, places=2)
 
     def testR_squared(self):

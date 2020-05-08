@@ -10,7 +10,7 @@ Build a regression package (Using Class)
 ## Usage
 
 ### Unit test
-There have two way to run unit test :
+There have two ways to run unit test :
 1. Using IDE(Pycharm) open project and directly run the `tests/*.py`
 2. Using command line python:
 ```cmd

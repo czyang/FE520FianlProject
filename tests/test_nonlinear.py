@@ -1,51 +1,30 @@
+import unittest
+
 import numpy as np
-import csv
-from regression import nonlinear
 
+from regression.nonlinear import NonLinearRegression
 
-relPath = ''
-
-with open(relPath + 'train.csv') as csvfile:
-    reader = csv.DictReader(csvfile)
-    y = np.array([int(row['price']) for row in reader])
-
-with open(relPath + 'train.csv') as csvfile:
-    reader = csv.DictReader(csvfile)
-    x = np.array([int(row['sqft_living']) for row in reader])
-
-with open(relPath + 'test.csv') as csvfile:
-    reader = csv.DictReader(csvfile)
-    yt = np.array([int(row['price']) for row in reader])
-
-with open(relPath + 'test.csv') as csvfile:
-    reader = csv.DictReader(csvfile)
-    xt = np.array([int(row['sqft_living']) for row in reader])
+x = np.array([1, 2, 3, 4, 5])
+y = np.array([2, 2, 3, 3, 5])
+x_test = np.array([11, 12, 13, 14, 15])
 
 m = len(x)
-# x = np.hstack([x, x1])
 x = x.reshape(m,1)
 y = y.reshape(m,1)
 
-csvfile.close()
+class TestNonLinear(unittest.TestCase):
+    def testfit(self):
+        NR = NonLinearRegression()
+        summary = NR.fit(x, y)
+        self.assertIsNotNone(summary.get_summary())
 
-n = len(xt)
-xt = xt.reshape(n,1)
-yt = yt.reshape(n,1)
+    # def testloss(self):
+    #     NR = NonLinearRegression()
+    #     self.assertIsNotNone(NR.loss(x, y))
 
-csvfile.close()
-import matplotlib.pyplot as plt
-LR = nonlinear.NonLinearRegression()
-sm = LR.fit(x, y)
-print(sm.get_summary())
-print(LR.coef, LR.intercept)
-y_pred = LR.predict(xt, False)
-x1 = np.linspace(0, 140000)
-y1 = LR.predict(x1, False)
+    # def testpredict(self):
+    #     NR = NonLinearRegression()
+    #     self.assertIsNotNone(NR.predict(x))
 
-plt.figure()
-plt.plot(x1,y1)
-plt.plot(x,y, 'ro')
-plt.xlabel('sqft_living')
-plt.ylabel('price')
-plt.title('Normal Equation')
-plt.show()
+if __name__ == '__main__':
+  unittest.main()
