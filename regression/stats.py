@@ -2,6 +2,7 @@ import numpy as np
 import math
 import scipy.stats as stats
 
+
 class Stats:
 	def SSE(self, y_test, y_pred):
 		return np.sum((y_test - y_pred) ** 2)
