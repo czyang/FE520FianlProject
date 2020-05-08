@@ -21,11 +21,7 @@ class NonLinearRegression(LinearRegression):
 		summary = LinearRegression.fit(self, x_train, y_train)
 		summary.setTitle("Nonlinear Regression")
 		return summary
-
-	def loss(self, x_train, y_train):
-		y_pred = self.predict(x_train)
-		return np.mean((y_train - y_pred) ** 2)
-
+	
 	def predict(self, x_test, enlarged = True):
 		if enlarged == False:
 			x_test = self.enlarge(x_test)
